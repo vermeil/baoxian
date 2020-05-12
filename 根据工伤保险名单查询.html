@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>根据工伤保险名单查询</title>
+</head>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="jquery-3.0.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .content{
+            float: left;
+            width: 95%;
+            min-height:500px;
+            margin:15px 30px;
+            padding:20px;
+            box-shadow:5px 5px 10px rgb(176, 167, 167);
+            border-radius:5px;
+            transition:all 0.6s;
+        }
+        .content:hover{
+            border-radius:15px;
+            box-shadow:5px 5px 25px rgb(121,121,128);
+        }
+        .chaxun ,.textarea_div{
+            float:left;
+            width: 30%;
+        }
+        .textarea_div textarea{
+            display: inline-block;
+            float:left;
+            height: 520px;
+            width:calc(50% - 20px);
+        }
+        .textarea_div .p_text{
+            float:left;
+            line-height:520px;
+            margin:0 10px;
+        }
+        #inp{
+            float: left;
+            width: 150px;
+            margin-right: 5px;
+        }
+        .btn{
+            float: left;
+            margin-right:10px;
+        }
+        .cx{
+            width: 70%;
+            float:left;
+        }
+        #table{
+            width:66%;
+            margin:10px 2%;
+            float:left;
+        }
+        .head tr{
+            margin-bottom: 15px;
+            padding-bottom: 25px;
+            height: 50px;
+        }
+        .btn_clear{
+            float: none;
+            margin-left:111px;
+        }
+        .color_weight{
+            font-weight:700;
+        }
+        .color_blue{
+            color:#0b5fdb;
+        }
+        .bottom_text{
+            text-align: center;
+        }
+    </style>
+<body>
+    <div class="content">
+    <div class="textarea_div">
+        <p> <span>右侧对比左侧库</span>
+            <button type="button" class="btn btn_clear btn-default">清空右文本</button>
+        </p>
+       <textarea type="text" id="obj_text"  class="form-control" disabled ></textarea>
+       <p class="p_text">→</p>
+       <textarea type="text" id="obj_text1"  class="form-control"></textarea>
+    </div>
+    <div class="cx">
+        <button type="button" class="btn btn0 btn-primary">取重查询</button>
+        <button type="button" class="btn btn1 btn-default">去重查询</button>
+        <div class="chaxun">
+            <input type="text"  class="form-control"  name="" value="" id="inp"  placeholder="姓名 or 身份证号">
+            <button type="button" class="button btn2 btn btn-success">查询</button>
+        </div>
+        <button type="button" class="btn btn-link list1">序号</button>
+        <button type="button" class="btn btn-link list2">姓名</button>
+        <button type="button" class="btn btn-link list3">性别</button>
+        <button type="button" class="btn btn-link list4">身份证</button>
+        <button type="button" class="btn btn-link list5">参加工作日期</button>
+        <button type="button" class="btn btn-link list6">学历</button>
+    </div>
+        <table id="table">
+            <thead class="head">
+            </thead>
+            <tbody class="text">
+            </tbody>
+        </table>
+    </div>
+    <p class="bottom_text">
+        左侧文本框使用<span class="color_blue">[工伤保险人员名单]</span>作为数据库 <br />
+        在右侧文本框输入（推荐复制Excel或者Word 查询姓名）可以用来筛选与库重复的数据<span class="color_blue">[取重查询]</span>，或者不包含在库的名字<span  class="color_weight"> [去重查询]</span><br />
+    </p>
+</body>
+<script>
+
+    $(function(){
+        $("#obj_text").text(obj.name)
+    })
+    let data1 = {
+        name:[
+       "孟庆忠","吴孝生","张红丽","刘明","吴艳","刘萍","高晓辉","朱瑞英","左鹏飞","马明剑","朱群涛","程广磊","李庆杰","段保伍","刘芳","朱明明","许雪艳","马炳晨","黄河","李东","朱金涛","李中卫","吴格伟","李强","陈秀志","吴亚伟","朱贵庆","高红香","朱秀正","张起康","孟海波","朱建忠","陈大松","孙洪军","朱曼","李中华","曹冰冰","张冬媛","李月霞","骆慧芳","高鹏辉","李新建","张宁","郑心超","陈鹤","丁明","胡改菊","贾建强","蒋贵华","李凤娇","李建勇","李良鹏","刘丽","刘永杰","吕文军","孟冰","石秀峰","王常磊","王东峰","王虎","王淞","王喜民","吴连营","吴茂林","肖建峰","杨志英","张朝龙","张天吴","朱传义","朱红丽","朱盼盼","左文宇","王光军","张雪花","伏自杰","孟庆华","孔祥林","吴永林"
+        ], //姓名
+        sex :[
+        1,1,2,1,2,2,1,2,1,1,1,1,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,1,1,2,2,2,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,2,2,2,1,2,1,2,1,1
+        ], //性别 1男 2女
+        shenfen : [
+            "412323196810290051","412323196402150076","412323197603060063","412323196512270052","412323197603180049","412323197906180329","412301198102204010","412323197010280028","411421199011200090","412323198303020136","411421198709100170","410922198402062758","41232319790619021X","412323197403240051","41142119871005284X","411421199109062857","411421198608120826","411421198606262839","411421198910260037","412323197411290913","411421199009123157","412323198201020039","411421198912281210","412323198005130011","410727196810105018","412323198302100054","412323197712070017","411421198810170309","411421199008280054","412323196406060035","412323197204070037","412323196610030132","412323196603255237","412323197302280214","411421199001060040","412322198308131832","411421199002020016","412801198811240847","412322197903291844","410581198910209101","411421198919160191","412323197206160079","411421199206050014","412323196903170032","412323197305020055","412323197208150050","412323197811080085","412323196803030016","320322198610124437","412323197101020280","412323197809177216","41232319791005005X","412323197801100062","412323197202220134","41232319620920241X","411421199002287837","412323197808100102","411421199008024034","412301197801152518","412323198303202837","513026197303054398","412323197701160092","412323197103271219","412323196910041212","412323197510020214","420111197006185793","412323197407160112","411421198812254864","412323196410010110","412323197105010047","411421198904080064","411421199202160240","412323197711080037","411421199201187644","412323196711210036","412323197803120024","412323196306080012","41232319730901121X"
+        ], //身份证
+        canjia : [
+            "198912","198412","199305","199505","199305","199909","200402","198808","200501","200501","201001","201001","199305","201101","201106","201106","201106","201207","201210","201501","201604","201604","201604","199512","201310","199912","199305","201501","201501","199611","199305","199412","201501","199305","201001","201604","201701","201701","201701","201701","200812","199312","201905","198612","199001","199305","199412","198912","201707","199305","201707","201308","199312","198612","199512","201106","200107","201604","199508","201709","201604","201904","199501","199312","199312","201707","200007","202002","198212","199305","201707","201501","199509","201202","199312","199506","198612","199501"
+        ],  //参加工作日期
+        xueli : [
+            31,41,41,31,31,41,31,41,41,31,41,21,31,31,31,41,31,21,31,31,41,31,41,21,31,31,31,41,31,31,31,41,31,31,41,41,31,21,21,41,41,41,21,41,41,41,31,31,21,31,21,41,31,31,31,41,41,31,21,41,41,41,41,31,31,21,31,41,31,41,21,31,41,31,31,31,41,31
+        ]   //学历  //41中专    31大专    21本科
+    }   //工伤参保人员 79
+    let data2 = {
+        name : [
+        "孟庆忠","吴孝生","张红丽","刘明","吴艳","刘萍","高晓辉","朱瑞英","左鹏飞","马明剑","朱群涛","程广磊","李庆杰","段保伍","吴佩芳","刘芳","朱明明","许雪艳","王超","马炳晨","黄河","李东","朱金涛","李中卫","吴格伟","李琰","李强","陈秀志","吴亚伟","朱贵庆","高红香","朱秀正","代瑞峰","高攀峰","张起康","孟海波","朱建忠","陈大松","孙洪军","朱曼","李中华","张理政","曹冰冰","陈文龙","苏怀坡","魏荣恒","张冬媛","李月霞","郑啦啦","骆慧芳","崔战民","樊海超","高鹏辉","高保良","张运博","肖传伟","刘合群","张博","李付义","郑自强","陈双进"
+
+        ],
+        sex : [1,1,2,1,2,2,1,2,1,1,1,1,1,1,2,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,2,1,2,1,1,1,1,1,1,1,1,1,1,1],
+        shenfen : ["412323196810290051","412323196402150076","412323197603060063","412323196512270052","412323197603180049","412323197906180329","412301198102204010","412323197010280028","411421199011200090","412323198303020136","411421198709100170","410922198402062758","41232319790619021X","412323197403240051","411421199004020087","41142119871005284X","411421199109062857","411421198608120826","411421198910031656","411421198606262839","411421198910260037","412323197411290913","411421199009123157","412323198201020039","411421198912281210","411421199308220846","412323198005130011","410727196810105018","412323198302100054","412323197712070017","411421198810170309","411421199008280054","412323197906295652","411421198706300011","412323196406060035","412323197204070037","412323196610030132","412323196603255237","412323197302280214","411421199001060040","412322198308131832","411421198907102011","411421199002020016","410225198412111518","410126197508096531","411329198210042835","412801198811240847","412322197903291844","41020619790118203X","410581198910209101","412323197308202831","412323197205122417","411421198919160191","411421199005062457","411421196809167752","412323196712261679","412323196704137213","411421198707015212","412323196701162819","412323197906162497","412323196504136814"],
+        canjia : ["198912","198412","199305","199505","199305","199909","200402","198808","200501","200501","201001","201001","199305","201101","201101","201106","201106","201106","201204","201207","201210","201501","201604","201604","201604","201501","199512","201310","199912","199305","201501","201501","201501","201501","199611","199305","199412","201501","199305","201001","201604","201701","201701","201701","201701","201701","201701","201701","201701","201701","201703","201703","200812","201703","201703","201703","201703","201703","201703","201703","201703"],
+        xueli : [31,41,41,31,31,41,31,41,41,31,41,21,31,31,41,31,41,31,21,21,31,31,41,31,41,31,21,31,31,31,41,31,31,21,31,31,41,31,31,41,41,21,31,21,21,21,21,21,21,41,41,31,41,41,41,41,41,41,41,41,41]
+    }   //工伤参保人员旧 61
+
+    let obj = data1;
+    let obj2 = {};
+    $('.btn0').on('click',()=>{//取重
+        rep($('#obj_text1'))
+
+        let pnum = {
+            name : [],
+            sex : [],
+            shenfen : [],
+            canjia : [],
+            xueli : []
+        }
+        var num = 1;
+        $('.text , .head').empty()
+        $('.head').append(`
+            <tr>
+                <th class="th_num">序号</th>
+                <th class="th_name">姓名</th>
+                <th class="th_sex">性别</th>
+                <th class="th_shenfen">身份证</th>
+                <th class="th_canjia">参加工作日期</th>
+                <th class="th_xueli">学历</th>
+            </tr>
+        `)
+        for (let i = obj.name.length - 1; i >= 0; i--) {
+            for (let j = obj2.name.length - 1; j >= 0; j--) {
+                if(obj.name[i] == obj2.name[j]){
+                    pnum.name.unshift(obj.name[i]);
+                    pnum.sex.unshift(obj.sex[i]);
+                    pnum.shenfen.unshift(obj.shenfen[i]);
+                    pnum.canjia.unshift(obj.canjia[i]);
+                    pnum.xueli.unshift(obj.xueli[i]);
+
+                    var sex = (obj.sex[i] === 1)? '男' :'女';
+                    var xueli = obj.xueli[i]
+                    if(xueli == 31){
+                        xueli = '大专'
+                    }else if(xueli == 21){
+                        xueli = '本科'
+                    }else if(xueli == 41){
+                        xueli = '中专'
+                    }
+                   $('.text').append(`
+                        <tr>
+                            <td class="td_num">${num++}</td>
+                            <td class="td_name">${obj.name[i]}</td>
+                            <td class="td_sex">${sex}</td>
+                            <td class="td_shenfen">${obj.shenfen[i]}</td>
+                            <td class="td_canjia">${obj.canjia[i]}</td>
+                            <td class="th_xueli">${xueli}</td>
+                        </tr>
+                    `)
+                    break;
+                }
+            }
+       }
+        // console.log(pnum)
+        // console.log('人数姓名: '+pnum.name)
+        // console.log('在库的人数：'+pnum.name.length)
+    })
+
+    $('.btn1').on('click',()=>{ //去重
+        rep($('#obj_text1'))
+
+        var num = 1;
+        let pnum = []; // 取重以后人数姓名
+
+        $('.text , .head').empty()
+        $('.head').append(`
+            <tr>
+                <th class="th_num">序号</th>
+                <th class="th_name">姓名</th>
+            </tr>
+        `)
+        for (let i = obj.name.length - 1; i >= 0; i--) {
+            for (let j = obj2.name.length - 1; j >= 0; j--) {
+                if(obj.name[i] == obj2.name[j]){
+                    pnum.push(obj2.name[j]);
+                    break;
+                }
+            };
+       }
+        let pnum2 = []
+        for (var i = obj2.name.length - 1; i >= 0; i--) {
+             pnum2.unshift(obj2.name[i])
+        };
+        for (let i = pnum.length - 1; i >= 0; i--) {
+            for (let j = obj2.name.length - 1; j >= 0; j--) {
+                if(pnum[i] == pnum2[j]){
+                    pnum2.splice(j, 1)
+                    break;
+                }
+            }
+        }
+
+        for (var i = pnum2.length - 1; i >= 0; i--) {
+            $('.text').append(`
+                <tr>
+                    <td class="td_num">${num++}</td>
+                    <td class="td_name">${pnum2[i]}</td>
+                </tr>
+            `)
+        };
+
+        // console.log('人数姓名: '+pnum2)
+        // console.log('不在库的人数:'+pnum2.length )
+    })
+
+    $('.btn2').on('click',function_chaxun)
+    //回车
+    $(document).on('keyup', function(event) {
+        if (event.keyCode == "13") {
+            // //去空格
+            // rep($('#obj_text'))
+            // rep($('#obj_text1'))
+            //回车执行查询
+            function_chaxun();
+        }
+    });
+    //查询
+    function function_chaxun () {
+        var num = 1;
+        $('.text , .head').empty()
+        $('.head').append(`
+            <tr>
+                <th class="th_num">序号</th>
+                <th class="th_name">姓名</th>
+                <th class="th_sex">性别</th>
+                <th class="th_shenfen">身份证</th>
+                <th class="th_canjia">参加工作日期</th>
+                <th class="th_xueli">学历</th>
+            </tr>
+        `)
+
+        for (var i = obj.name.length - 1; i >= 0; i--) {
+
+            var sex = (obj.sex[i] === 1)? '男' :'女';
+            var xueli = obj.xueli[i]
+            if(xueli == 31){
+                xueli = '大专'
+            }else if(xueli == 21){
+                xueli = '本科'
+            }else if(xueli == 41){
+                xueli = '中专'
+            }
+            if( obj.name[i].indexOf($.trim($('#inp').val()))!= -1
+                || obj.shenfen[i] == $.trim($('#inp').val())
+                || obj.canjia[i] == $.trim($('#inp').val())
+                || sex == $.trim($('#inp').val())
+                || xueli == $.trim($('#inp').val())
+             ){
+                   $('.text').append(`
+                        <tr>
+                            <td class="td_num">${num++}</td>
+                            <td class="td_name">${obj.name[i]}</td>
+                            <td class="td_sex">${sex}</td>
+                            <td class="td_shenfen">${obj.shenfen[i]}</td>
+                            <td class="td_canjia">${obj.canjia[i]}</td>
+                            <td class="td_xueli">${xueli}</td>
+                        </tr>
+                    `)
+            }
+        };
+        if($('#inp').val() == ''){
+            $('.btn0').click()
+        }
+    }
+
+    $('.list1').on('click',()=>{//序号
+        $('.td_num , .th_num').remove()
+    })
+    $('.list2').on('click',()=>{//姓名
+        $('.td_name , .th_name').remove()
+    })
+    $('.list3').on('click',()=>{//性别
+        $('.td_sex , .th_sex').remove()
+    })
+    $('.list4').on('click',()=>{//身份
+        $('.td_shenfen , .th_shenfen').remove()
+    })
+    $('.list5').on('click',()=>{//参加工作日期
+        $('.td_canjia , .th_canjia').remove()
+    })
+    $('.list6').on('click',()=>{//学历
+        $('.td_xueli , .th_xueli').remove()
+    })
+
+    //去空格
+    function rep (_this){
+        let val = _this.val()
+        val = val.split(/[\s\,\r\n]+/);
+        for (var i = val.length - 1; i >= 0; i--) {
+            val[i] = $.trim(val[i])
+        }
+        obj2.name = val
+        // console.log(obj2.name)
+    }
+
+    //清空右
+    $('.btn_clear').on('click',function(){
+        $('#obj_text1').val('')
+    })
+</script>
+</html>
+
