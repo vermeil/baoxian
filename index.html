@@ -73,6 +73,9 @@
         .bottom_text{
             text-align: center;
         }
+        .td_shenfen input{
+            width: 200px !important;
+        }
     </style>
 <body>
     <div class="content">
@@ -190,7 +193,7 @@
                             <td class="td_num">${num++}</td>
                             <td class="td_name">${obj.name[i]}</td>
                             <td class="td_sex">${sex}</td>
-                            <td class="td_shenfen">${obj.shenfen[i]}</td>
+                            <td class="td_shenfen"><input type="text" class="form-control" value=${obj.shenfen[i]}></td>
                             <td class="td_canjia">${obj.canjia[i]}</td>
                             <td class="th_xueli">${xueli}</td>
                         </tr>
@@ -219,7 +222,7 @@
         `)
         for (let i = obj.name.length - 1; i >= 0; i--) {
             for (let j = obj2.name.length - 1; j >= 0; j--) {
-                if(obj.name[i] == obj2.name[j]){
+                if(obj.name[i] == obj2.name[j] ){
                     pnum.push(obj2.name[j]);
                     break;
                 }
@@ -239,12 +242,14 @@
         }
 
         for (var i = pnum2.length - 1; i >= 0; i--) {
-            $('.text').append(`
-                <tr>
-                    <td class="td_num">${num++}</td>
-                    <td class="td_name">${pnum2[i]}</td>
-                </tr>
-            `)
+            if($.trim(pnum2[i])){
+                $('.text').append(`
+                    <tr>
+                        <td class="td_num">${num++}</td>
+                        <td class="td_name">${pnum2[i]}</td>
+                    </tr>
+                `)
+            }
         };
 
         // console.log('人数姓名: '+pnum2)
@@ -299,7 +304,7 @@
                             <td class="td_num">${num++}</td>
                             <td class="td_name">${obj.name[i]}</td>
                             <td class="td_sex">${sex}</td>
-                            <td class="td_shenfen">${obj.shenfen[i]}</td>
+                            <td class="td_shenfen"><input type="text" class="form-control" value=${obj.shenfen[i]}></td>
                             <td class="td_canjia">${obj.canjia[i]}</td>
                             <td class="td_xueli">${xueli}</td>
                         </tr>
