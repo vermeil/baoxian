@@ -76,6 +76,9 @@
         .td_shenfen input{
             width: 200px !important;
         }
+        .td_name input{
+            width: 100px !important;
+        }
     </style>
 <body>
     <div class="content">
@@ -201,7 +204,7 @@
                    $('.text').append(`
                         <tr>
                             <td class="td_num">${num++}</td>
-                            <td class="td_name">${obj.name[i]}</td>
+                            <td class="td_name"><input type="text" class="form-control" value=${obj.name[i]}></td>
                             <td class="td_shenfen"><input type="text" class="form-control" value=${obj.shenfen[i]}></td>
                             <td class="td_sex">${sex}</td>
                             <td class="td_canjia">${obj.canjia[i]}</td>
@@ -313,7 +316,7 @@
                    $('.text').append(`
                         <tr>
                             <td class="td_num">${num++}</td>
-                            <td class="td_name">${obj.name[i]}</td>
+                            <td class="td_name"><input type="text" class="form-control" value=${obj.name[i]}></td>
                             <td class="td_shenfen"><input type="text" class="form-control" value=${obj.shenfen[i]}></td>
                             <td class="td_sex">${sex}</td>
                             <td class="td_canjia">${obj.canjia[i]}</td>
